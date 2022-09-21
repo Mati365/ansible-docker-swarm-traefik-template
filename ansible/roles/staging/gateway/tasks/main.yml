@@ -1,0 +1,29 @@
+- name: Sync gateway key / envs folders
+  include_tasks: "{{ playbook_dir }}/roles/utils/tasks/copy-env-keys.yml"
+  vars:
+    src_paths:
+      envs: "{{ gateway_paths.local.envs }}"
+      all_keys: "{{ gateway_paths.local.all_keys }}"
+
+    dest_paths:
+      envs: "{{ gateway_paths.envs }}"
+      all_keys: "{{ gateway_paths.all_keys }}"
+
+- name: Sync gateway scripts folder
+  synchronize:
+    src: "{{ gateway_paths.local.service }}/scripts/"
+    dest: "{{ gateway_paths.root }}/scripts"
+    rsync_opts:
+      - "--chmod=F740"
+      - "--chown=deploy:webusers"
+
+- name: Sync docker folder
+  synchronize:
+    src: "{{ gateway_paths.local.service }}/docker/"
+    dest: "{{ gateway_paths.root }}"
+    rsync_opts:
+      - "--chmod=F640"
+      - "--chown=deploy:webusers"
+
+- name: Deploy gateway
+  command: "{{ gateway_paths.root }}/scripts/setup.mjs"

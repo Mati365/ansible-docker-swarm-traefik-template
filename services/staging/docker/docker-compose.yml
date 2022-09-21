@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  web:
+    image: 127.0.0.1:5000/${BUILD_APP_PREFIX}-web-${BUILD_NAME}
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./front.dockerfile
+      network: host
+      args:
+        app_path: /var/www/web.example.com
+
+  router:
+    image: 127.0.0.1:5000/${BUILD_APP_PREFIX}-router-${BUILD_NAME}
+    restart: always
+    hostname: web-router-${BUILD_NAME}
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=webgateway"
+        - "traefik.http.services.web-router-${BUILD_NAME}.loadbalancer.server.port=80"
+        - "traefik.http.routers.web-router-${BUILD_NAME}.entrypoints=http,https"
+        - "traefik.http.routers.web-router-${BUILD_NAME}.rule=Host(`${BUILD_NAME}.example.com`)"
+        - "traefik.http.routers.web-router-${BUILD_NAME}.middlewares=app-auth"
+        - "traefik.http.middlewares.app-auth.basicauth.users=${GLOBAL_BASIC_AUTH}"
+    networks:
+      - default
+      - webgateway
+    depends_on:
+      - web
+    build:
+      context: ./
+      dockerfile: ./router.dockerfile
+      network: host
+    ports:
+      - '80'
+
+networks:
+  webgateway:
+    external: true

@@ -1,0 +1,26 @@
+- name: Create config skeleton directories if not exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: deploy
+    group: webusers
+    mode: 0770
+  loop:
+    - "{{ dest_paths.envs }}"
+    - "{{ dest_paths.all_keys }}"
+
+- name: Synchronize envs
+  synchronize:
+    src: "{{ src_paths.envs }}/"
+    dest: "{{ dest_paths.envs }}"
+    rsync_opts:
+      - "--chmod=F640"
+      - "--chown=deploy:webusers"
+
+- name: Synchronize keys
+  synchronize:
+    src: "{{ src_paths.all_keys }}/"
+    dest: "{{ dest_paths.all_keys }}"
+    rsync_opts:
+      - "--chmod=F600"
+      - "--chown=deploy:webusers"

@@ -1,0 +1,19 @@
+staging_paths:
+  root: "{{ shared_paths.root }}/staging"
+  envs: "{{ shared_paths.root }}/staging/envs"
+  all_keys: "{{ shared_paths.root }}/staging/keys"
+
+  local:
+    envs: "{{ local_paths.envs }}/staging"
+    all_keys: "{{ local_paths.all_keys }}/services/staging"
+    service: "{{ local_paths.services }}/staging"
+
+gateway_paths:
+  root: "{{ shared_paths.root }}/gateway"
+  envs: "{{ shared_paths.root }}/gateway/envs"
+  all_keys: "{{ shared_paths.root }}/gateway/keys"
+
+  local:
+    envs: "{{ local_paths.envs }}/staging/gateway"
+    all_keys: "{{ local_paths.all_keys }}/services/staging/gateway"
+    service: "{{ local_paths.services }}/staging/gateway"

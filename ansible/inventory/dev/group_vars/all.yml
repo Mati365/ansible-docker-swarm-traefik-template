@@ -1,0 +1,4 @@
+ip:
+  advert: "{{ ansible_eth1.ipv4.address }}"
+  interface:
+    default: "eth1"

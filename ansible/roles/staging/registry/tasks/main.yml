@@ -1,0 +1,20 @@
+- name: Check if docker swarm initialized
+  docker_swarm:
+    state: present
+    advertise_addr: "{{ ip.advert }}"
+
+- name: Check if registry initialized
+  shell: docker service ls | grep 'registry'
+  register: registry_result
+  ignore_errors: true
+
+- name: Create registry
+  when: registry_result.stdout == ""
+  command: docker service create --name registry --publish 5000:5000 registry:2
+
+- name: Wait registry to response
+  command: curl --connect-timeout 5 --silent --show-error http://localhost:5000/v2/
+  retries: 10
+  delay: 3
+  register: result
+  until: result.rc == 0

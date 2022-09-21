@@ -1,0 +1,20 @@
+[log]
+level = "debug"
+
+[api]
+dashboard = true
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+
+  [entryPoints.https]
+  address = ":443"
+
+[providers]
+  [providers.docker]
+  endpoint = "unix:///var/run/docker.sock"
+  network = "webgateway"
+  swarmMode = true
+  exposedByDefault = false
+  watch = true

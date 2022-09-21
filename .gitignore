@@ -1,0 +1,13 @@
+template/docker/*/.env
+template/docker/*/env/*
+template/docker/*/*.env
+!template/docker/*/env/*.example
+template/docker/dashboard-e2e/data
+node_modules
+keys/ansible/id_rsa*
+.vagrant/
+*.log
+*.key*
+*.env
+!envs/staging/basic_auth.env
+!envs/staging/gateway/dashboard_basic_auth.env

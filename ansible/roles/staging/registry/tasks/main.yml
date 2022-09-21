@@ -13,7 +13,7 @@
   command: docker service create --name registry --publish 5000:5000 registry:2
 
 - name: Wait registry to response
-  command: curl --connect-timeout 5 --silent --show-error http://localhost:5000/v2/
+  command: curl --connect-timeout 5 --silent --show-error http://127.0.0.1:5000/v2/
   retries: 10
   delay: 3
   register: result

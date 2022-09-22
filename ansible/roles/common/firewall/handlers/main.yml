@@ -1,2 +1,2 @@
 - name: Restore firewall rules
-  command: /bin/restore-iptables-rules.sh
+  command: /usr/bin/restore-iptables-rules.sh

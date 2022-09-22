@@ -49,7 +49,7 @@
 - name: Copy remove dangling images script
   copy:
     src: remove-dangling-images.sh
-    dest: /bin/
+    dest: /usr/bin/
     owner: root
     group: root
     mode: 0744

@@ -4,7 +4,7 @@ Wants=remove-dangling-images.timer
 
 [Service]
 Type=oneshot
-ExecStart=/bin/remove-dangling-images.sh
+ExecStart=/usr/bin/remove-dangling-images.sh
 
 [Install]
 WantedBy=multi-user.target

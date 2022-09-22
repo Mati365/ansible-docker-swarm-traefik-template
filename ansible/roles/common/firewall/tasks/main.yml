@@ -19,7 +19,7 @@
 - name: Copy restore routes script
   copy:
     src: restore-iptables-rules.sh
-    dest: /bin/
+    dest: /usr/bin/
     owner: root
     group: root
     mode: 0744

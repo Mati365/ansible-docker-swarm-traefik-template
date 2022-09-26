@@ -4,9 +4,9 @@ staging_paths:
   all_keys: "{{ shared_paths.root }}/staging/keys"
 
   local:
-    envs: "{{ local_paths.envs }}/staging"
-    all_keys: "{{ local_paths.all_keys }}/services/staging"
-    service: "{{ local_paths.services }}/staging"
+    envs: "{{ local_paths.envs }}/staging/skeleton"
+    all_keys: "{{ local_paths.all_keys }}/services/staging/skeleton"
+    service: "{{ local_paths.services }}/staging/skeleton"
 
 gateway_paths:
   root: "{{ shared_paths.root }}/gateway"

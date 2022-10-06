@@ -1,4 +1,4 @@
-# Vagrant + Ansible + Docker Swarm + Trafeik + NGINX template
+# Vagrant + Ansible + Docker Swarm + Traefik + NGINX template
 
 Template repo that creates virtual machines with Docker, Docker Swarm, Traefik, NGINX. It shows how easy you can create "feature branch" deployment on your VPS
 
